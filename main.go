@@ -16,7 +16,7 @@ import (
 func main() {
 	for {
 		sign()
-		time.Sleep(24 * time.Second) //24小时执行一次
+		time.Sleep(24 * time.Hour) //24小时执行一次
 	}
 }
 
