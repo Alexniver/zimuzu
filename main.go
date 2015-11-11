@@ -14,9 +14,12 @@ import (
 )
 
 func main() {
+	timer := time.NewTicker(24 * time.Hour) //24小时执行一次
 	for {
-		sign()
-		time.Sleep(24 * time.Hour) //24小时执行一次
+		select {
+		case <-timer.C:
+			go sign()
+		}
 	}
 }
 
