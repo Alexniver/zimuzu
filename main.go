@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	//"fmt"
 	"github.com/Alexniver/logger4go"
 	"golang.org/x/net/publicsuffix"
 	"io/ioutil"
@@ -60,8 +61,32 @@ func sign() {
 	req.Header.Set("Accept", "application/json, text/javascript, */*; q=0.01")
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	resp, _ := client.Do(req)
+	/*content, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		logger.Error(err)
+	}
+	fmt.Println("login : ", string(content))*/
 
 	resp, err = client.Get("http://www.zimuzu.tv/user/sign")
+	/*content, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		logger.Error("get page: ", err)
+	}
+	fmt.Println(string(content))*/
+
+	time.Sleep(3 * time.Second)
+	resp, err = client.Get("http://www.zimuzu.tv/user/login/getCurUserTopInfo")
+
+	/*content, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		logger.Error("get Cur User Top Info : ", err)
+	}
+
+	fmt.Println(string(content))*/
+	resp, err = client.Get("http://www.zimuzu.tv/user/&")
+
+	return //已经不需要再签到了,只要登陆即可
 
 	time.Sleep(15 * time.Second)
 	resp, err = client.Get("http://www.zimuzu.tv/user/sign/dosign")
